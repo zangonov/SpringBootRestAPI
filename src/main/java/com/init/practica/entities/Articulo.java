@@ -17,7 +17,6 @@ import javax.persistence.OneToMany;
 @Table(name="articulos")
 public class Articulo {
 	
-	
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -33,7 +32,7 @@ public class Articulo {
 	private float precio;
 	
 	@ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name="id_catalogo", nullable=false)
+	@JoinColumn(name = "id_catalogo", referencedColumnName = "id")
     private Catalogo catalogo;
 	
 	@OneToMany(mappedBy = "articulo")
@@ -79,6 +78,7 @@ public class Articulo {
 		this.precio = precio;
 	}
 
+
 	public Articulo(String nombre, String descripcion, Catalogo catalogo) {
 		super();
 		this.nombre = nombre;
@@ -93,11 +93,16 @@ public class Articulo {
 
 	@Override
 	public String toString() {
-		return "Articulo{" +
-				"id=" + Id +
-				", nombre='" + nombre + '\'' +
-				", descripcion='" + descripcion + '\'' +
-				'}';
+		String texto= "Articulo{" +
+				"id=" + this.Id +
+				", nombre='" + this.nombre + '\'' +
+				", descripcion='" + this.descripcion + '\'';
+				if (this.catalogo != null) {
+				texto += ", catalogo='" + this.catalogo.getNombre() + '\'' ; 
+				}
+				texto += +'}';
+					
+		return texto;
 	}
 	
 

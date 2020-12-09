@@ -5,12 +5,7 @@ import java.util.Optional;
 
 import com.init.practica.entities.Articulo;
 
-
 public interface ArticuloService {
-	
-	public List<Articulo> findAllByCatalogo(long id);
-	
-	public List<Articulo> findAllByPedido(long idPedido);
 	
 	public List<Articulo> findAll();
 	

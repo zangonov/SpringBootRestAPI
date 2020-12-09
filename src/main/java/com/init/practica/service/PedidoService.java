@@ -5,8 +5,6 @@ import java.util.Optional;
 
 import com.init.practica.entities.Pedido;
 
-
-
 public interface PedidoService {
 	
 	public List<Pedido> findAll();

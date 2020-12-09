@@ -2,13 +2,13 @@ package com.init.practica.entities;
 
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
+
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -24,8 +24,7 @@ public class Catalogo {
 	@Column(name="nombre", nullable=false, length = 30)
 	private String nombre;
 	
-	@OneToMany(mappedBy="catalogo", fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="catalogo", fetch = FetchType.LAZY)
     private Set<Articulo> articulos;
 	
 
@@ -56,12 +55,11 @@ public class Catalogo {
 	public Catalogo() {
 	}
 
-
 	@Override
 	public String toString() {
 		return "Catalogo{" +
-				"id=" + Id +
-				", nombre='" + nombre + '\'' +
+				"id=" + this.Id + '\'' +
+				", nombre='" + this.nombre + '\'' +
 				'}';
 	}
 }

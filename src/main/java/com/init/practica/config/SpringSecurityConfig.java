@@ -22,15 +22,15 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
             // other public endpoints of your API may be appended to this array
     };
 	
-	// Create 2 users for demo
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
         auth.inMemoryAuthentication()
                 .withUser("user").password("{noop}user").roles("USER")
-                .and()
+              .and()
                 .withUser("admin").password("{noop}admin").roles("USER", "ADMIN");
 
+         
     }
     
  // Secure the endpoins with HTTP Basic authentication
@@ -41,7 +41,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
                 .httpBasic()
                 .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/api/**").hasRole("USER")
+                .antMatchers(HttpMethod.GET, "/api/**").hasAnyRole("USER","ADMIN")
                 .antMatchers(HttpMethod.POST, "/api/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.PUT, "/api/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/api/**").hasRole("ADMIN")
@@ -49,8 +49,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
                 .and()
                 .csrf().disable()
                 .formLogin().disable();
- 
-
     }
 }
 

@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -27,10 +29,12 @@ public class Pedido {
 	
 	@Column(name="total", nullable=true)
 	private float total;
-	
-	@OneToMany(mappedBy = "pedido", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    Set<ArticulosPedido> articulosPedido;
 
+	@OneToMany(mappedBy = "pedido", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	//@JsonManagedReference
+    Set<ArticulosPedido> articulosPedido;
+	
+	
 	public Long getId() {
 		return Id;
 	}
@@ -62,13 +66,22 @@ public class Pedido {
 		this.nombre = nombre;
 	}
 
-	//public Set<ArticulosPedido> getArticulosPedido() {
-	//	return articulosPedido;
-	//}
+	public Set<ArticulosPedido> getArticulosPedido() {
+		return articulosPedido;
+	}
 
 	public void setArticulosPedido(Set<ArticulosPedido> articulosPedido) {
 		this.articulosPedido = articulosPedido;
 	}
-
+	
+	@Override
+	public String toString() {
+		return "Pedido{" +
+				"id=" + this.Id +
+				", nombre='" + this.nombre + '\'' +
+				", total='" + this.total + '\'' +
+				'}';
+	}
+	
 
 }

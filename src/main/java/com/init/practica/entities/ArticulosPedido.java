@@ -2,6 +2,7 @@ package com.init.practica.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -10,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="articulosPedidos")
@@ -18,8 +20,9 @@ public class ArticulosPedido {
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-    int id;
+    long id;
     
+	@Column(name="cantidad")
     int cantidad;
 
     @ManyToOne
@@ -31,11 +34,11 @@ public class ArticulosPedido {
     @JsonBackReference
     Pedido pedido;
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -63,6 +66,14 @@ public class ArticulosPedido {
 		this.pedido = pedido;
 	}
 
-    
+	public ArticulosPedido(int cantidad, Articulo articulo, Pedido pedido) {
+		this.cantidad = cantidad;
+		this.articulo = articulo;
+		this.pedido = pedido;
+	}
+	
+	public ArticulosPedido() {
+		super();
+	}
 
 }

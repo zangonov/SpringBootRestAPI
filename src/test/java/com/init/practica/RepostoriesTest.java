@@ -52,6 +52,7 @@ public class RepostoriesTest {
     }	
      * @throws Exception
      */
+    /*
     
     @Before
     public void setUp() {
@@ -69,4 +70,6 @@ public class RepostoriesTest {
         this.mockMvc.perform(get("/api/catalogo/"))
             .andExpect(status().isOk());
 	}
+	
+	*/
 }
