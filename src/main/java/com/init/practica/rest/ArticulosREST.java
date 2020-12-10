@@ -61,14 +61,19 @@ public class ArticulosREST {
 	}
 
 	@DeleteMapping(value = "{Id}")
-	public ResponseEntity<Void> deleteArticulo(@PathVariable("Id") Long articuloId) {
+	public ResponseEntity<String> deleteArticulo(@PathVariable("Id") Long articuloId) {
 		logger.debug("ArticulosREST.deleteArticulo " + articuloId);
 		
 		Optional<Articulo> optionalArticulo = articuloService.findById(articuloId);
 
 		if (optionalArticulo.isPresent()) {
-			articuloService.deleteById(articuloId);
-			return ResponseEntity.ok(null);
+			List<Articulo> articulos = articuloService.findAllByArticuloIdPedido(articuloId);
+			if (articulos.size() ==0) {
+				articuloService.deleteById(articuloId);
+				return ResponseEntity.ok("El articulo se ha eliminado correctamente");
+			} else {
+				return ResponseEntity.ok("El articulo no se puede eliminar ya que pertence a un pedido");
+			}
 		} else {
 			return ResponseEntity.notFound().build();
 		}

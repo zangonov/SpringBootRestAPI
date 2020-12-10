@@ -7,5 +7,6 @@ import com.init.practica.entities.ArticulosPedido;
 
 @Repository
 public interface ArticulosPedidosDAO extends JpaRepository<ArticulosPedido,Long>{
+	
 
 }

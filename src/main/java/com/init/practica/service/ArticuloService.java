@@ -11,6 +11,10 @@ public interface ArticuloService {
 	
 	public Optional<Articulo> findById(long id);
 	
+	public List<Articulo> findAllByCatalogo(long CatalogoId);
+	
+	public List<Articulo> findAllByArticuloIdPedido(long articuloId);
+	
 	public Articulo create(Articulo articulo);
 	
 	public boolean update(Articulo articulo);

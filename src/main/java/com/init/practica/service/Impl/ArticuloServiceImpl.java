@@ -27,7 +27,23 @@ public class ArticuloServiceImpl  implements ArticuloService{
 		logger.debug("ArticuloServiceImpl.findAll");
 		return  articulosDAO.findAll();
 	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public List<Articulo> findAllByCatalogo(long CatalogoId) {
+		
+		return articulosDAO.findAllByCatalogueId(CatalogoId);
+	}
 
+	@Override
+	@Transactional(readOnly = true)
+	public List<Articulo> findAllByArticuloIdPedido(long articuloId) {
+		
+		return articulosDAO.findAllByArticuloIdPedido(articuloId);
+	}
+
+	
+	
 	@Override
 	@Transactional(readOnly = true)
 	public Optional<Articulo> findById(long id) {

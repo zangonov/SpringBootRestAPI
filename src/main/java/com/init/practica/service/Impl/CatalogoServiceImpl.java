@@ -8,7 +8,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.init.practica.daos.ArticulosDAO;
 import com.init.practica.daos.CatalogosDAO;
+import com.init.practica.entities.Articulo;
 import com.init.practica.entities.Catalogo;
 import com.init.practica.service.CatalogoService;
 
@@ -19,6 +21,9 @@ public class CatalogoServiceImpl implements CatalogoService{
 	
 	@Autowired
 	private CatalogosDAO catalogosDAO;
+	
+	@Autowired
+	private ArticulosDAO articulosDAO;
 	
 	public CatalogoServiceImpl() {	
 		super();
@@ -61,9 +66,14 @@ public class CatalogoServiceImpl implements CatalogoService{
 	}
 
 	@Override
-	public void deleteById(Long id) {
+	public boolean deleteById(Long id) {
 		logger.debug("CatalogoServiceImpl.deleteById " + id);
-		catalogosDAO.deleteById(id);
-		
+		List<Articulo> list = articulosDAO.findAllByCatalogueId(id);
+		if (list.size() ==0) {
+			catalogosDAO.deleteById(id);
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

@@ -1,6 +1,5 @@
 package com.init.practica;
 
-import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
  
 import org.junit.Test;

@@ -64,15 +64,19 @@ public class CatalogosREST {
 	}
 	
 	@DeleteMapping (value="{Id}") 
-	public ResponseEntity<Void> deleteCatalogo(@PathVariable("Id") Long catalogoId) {
+	public ResponseEntity<String> deleteCatalogo(@PathVariable("Id") Long catalogoId) {
 		
 		logger.debug("CatalogosREST.deleteCatalogo " + catalogoId);
 		
 		Optional<Catalogo> optionalCatalogo = catalogoService.findById(catalogoId);
 		
 		if (optionalCatalogo.isPresent()) {
-			catalogoService.deleteById(catalogoId);
-			return ResponseEntity.ok(null);	
+			if (catalogoService.deleteById(catalogoId)) {
+				return ResponseEntity.ok(null);
+			}
+			else{
+				return ResponseEntity.ok("No se puede eliminar la categoria");
+			}
 		}
 		else
 		{

@@ -16,4 +16,5 @@ public interface PedidoService {
 	public boolean update(Pedido pedido);
 	
 	public void deleteById(Long id);
+
 }

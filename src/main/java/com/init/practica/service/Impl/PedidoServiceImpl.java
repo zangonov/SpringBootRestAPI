@@ -40,7 +40,7 @@ public class PedidoServiceImpl implements PedidoService{
 		logger.debug("PedidoServiceImpl.findById " + id);
 		return  pedidosDAO.findById(id);
 	}
-
+	
 	@Override
 	@Transactional
 	public Pedido create(Pedido pedido) {

@@ -16,5 +16,5 @@ public interface CatalogoService {
 	
 	public boolean update(Catalogo catalogo);
 	
-	public void deleteById(Long id);
+	public boolean deleteById(Long id);
 }
